@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,9 +15,10 @@ import { SignUpValidation } from "@/lib/validation"
 import { Loader } from "lucide-react"
 import { Link } from "react-router-dom"
 import { createUserAccount } from "@/lib/appwrite/api"
+import { useToast } from "@/components/ui/use-toast"
 
 const SignUpForm = () => {
-
+  const { toast } = useToast()
   const isLoading = false;
 
   const form = useForm<z.infer<typeof SignUpValidation>>({
@@ -36,6 +36,11 @@ const SignUpForm = () => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     const newUser = await createUserAccount(values);
+    if(!newUser){
+      return toast({
+        title: "Sign Up Failed! Please try again.",
+      });
+    }
     console.log(newUser)
   }
 
