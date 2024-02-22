@@ -14,13 +14,12 @@ import { Input } from "@/components/ui/input"
 import { SignUpValidation } from "@/lib/validation"
 import { Loader } from "lucide-react"
 import { Link } from "react-router-dom"
-import { createUserAccount } from "@/lib/appwrite/api"
 import { useToast } from "@/components/ui/use-toast"
+import { useCreateUserAccountMutation } from "@/lib/react-query/queriesAndMutations"
 
 const SignUpForm = () => {
   const { toast } = useToast()
-  const isLoading = false;
-
+  const {mutateAsync: createUserAccount, isLoading: isCreatingUser} = useCreateUserAccountMutation();
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
     defaultValues: {
@@ -41,6 +40,7 @@ const SignUpForm = () => {
         title: "Sign Up Failed! Please try again.",
       });
     }
+    // const session = await signInAccount();
     console.log(newUser)
   }
 
@@ -109,7 +109,7 @@ const SignUpForm = () => {
           )}
         />
         <Button type="submit" className="shad-button_primary">
-            {isLoading ? (
+            {isCreatingUser ? (
               <div className="flex-center gap-2">
                 <Loader/>Loading...
               </div>
