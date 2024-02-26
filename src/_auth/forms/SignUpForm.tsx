@@ -14,11 +14,11 @@ import { SignUpValidation } from "@/lib/validation"
 import { Loader } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
-import { useCreateUserAccountMutation } from "@/lib/react-query/queriesAndMutations"
+import { useCreateUserAccount } from "@/lib/react-query/queriesAndMutations"
 
 const SignUpForm = () => {
   const { toast } = useToast()
-  const {mutateAsync: createUserAccount, isLoading: isCreatingUser} = useCreateUserAccountMutation();
+  const {mutateAsync: createUserAccount, isLoading: isCreatingUser} = useCreateUserAccount();
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
     defaultValues: {
