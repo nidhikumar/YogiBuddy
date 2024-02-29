@@ -1,7 +1,6 @@
 import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases } from "./config";
 import { INewUser } from "@/types";
-import { error } from "console";
 
 export async function createUserAccount(user: INewUser){
     try{
@@ -23,7 +22,7 @@ export async function createUserAccount(user: INewUser){
         })
         return newAccount;
     } catch(error){
-        console.log(error)
+        // console.log(error)
         return error;
     }
 }
@@ -44,7 +43,7 @@ export async function saveUserToDB(user: {
         )
         return newUser;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -53,7 +52,7 @@ export async function signInAccount(user:{ email: string; password: string;}){
         const session = await account.createSession(user.email, user.password);
         return session;
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
 
@@ -65,6 +64,6 @@ export async function getCurrentUser(){
         if(!currentUser) throw error;
         return currentUser.documents[0];
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     }
 }
