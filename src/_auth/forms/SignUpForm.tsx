@@ -58,7 +58,7 @@ const SignUpForm = () => {
       navigate('/')
     }
     else{
-      toast({title: 'Sign Up Failed! Please try again.'})
+      return toast({title: 'Sign Up Failed! Please try again.'})
     }
   }
 
